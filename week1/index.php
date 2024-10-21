@@ -4,7 +4,7 @@
 <a href="assoc_arrays.php">Assoc Arrays</a><br/>
 <a href="bool_cond.php">Boolean / Conditional</a><br/>
 <a href="functions.php">Functions</a><br/>
-<a href="variables.php">Variables</a><br/>
+<a href="variables.php">Variables</a><br/><br/>
 
 
 <a href="../index.php">Back to Portfolio</a>

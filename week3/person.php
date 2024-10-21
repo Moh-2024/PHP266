@@ -2,14 +2,12 @@
 
 abstract class Person
 {
-    private $first;
-    private $last;
-    private $ID;
+    protected $first;
+    protected $last;
 
-    public function __construct($firstArg, $lastArg)
-    {
+    public function __construct($firstArg, $lastArg){
         $this->first = $firstArg;
-        $this->last = $lastArg;   
+        $this->last = $lastArg;
     }
 
     public function setFirst($firstArg){
@@ -21,14 +19,23 @@ abstract class Person
     }
 
     public function setLast($lastArg){
-        $this->first = $lastArg;
+        $this->last = $lastArg;
     }
 
     public function getLast(){
         return $this->last;
     }
 
-    public function getID(){
-        return $this->ID;
+    public function getFullName(){
+        return $this->first . ' ' . $this->last;
     }
+
+    abstract function getPersonInfo();
 }
+
+
+
+
+
+
+

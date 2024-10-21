@@ -1,10 +1,5 @@
-<?php
-include 'person.php';
-
-$person = new Person('Moh', 'Malek');
-
-?>
-
-<h1><?= $person->getFirst();?></h1>
-<h2><?= $person->getlast();?></h1>
-<h3><?= $person->getID();?></h1>
+<?php include '../includes/header.php'; ?>
+<h1>Week 3 Assignments</h1>
+<a href="atm/atm_starter.php">ATM</a><br/><br/>
+<a href="../index.php">Back to Portfolio</a>
+<?php include '../includes/footer.php'; ?>
