@@ -10,7 +10,7 @@
 
     if (isset($_POST['storePatient'])) {
         $patientFirstName = filter_input(INPUT_POST, 'patientFirstName');
-        $patientLastName = filter_input(INPUT_POST, 'patientFirstName');
+        $patientLastName = filter_input(INPUT_POST, 'patientLastName');
         $patientMarried = filter_input(INPUT_POST, 'patientMarried', FILTER_VALIDATE_BOOL);
         $patientBirthDate = filter_input(INPUT_POST, 'patientBirthDate');
         
@@ -32,7 +32,7 @@
     <div class="col-sm-12"> 
         <a class='mar12' href="viewPatients.php">Back to View All Patients</a>
         <h2 class='mar12'>Add Patient</h2>
-        <form name="teams" method="post">
+        <form name="patients" method="post">
             <?php
                 if ($error != ""):
             ?>      
@@ -51,7 +51,7 @@
                         <label for="firstName" style="color: black;">Patient First Name:</label>
                     </div>
                     <div>
-                        <input type="text" id="firstName" name="name" class="form-control" value="<?= $patientFirstName; ?>" />
+                        <input type="text" id="firstName" name="patientFirstName" class="form-control" value="<?= $patientFirstName; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,7 +59,7 @@
                         <label for="lastName" style="color: black;">Patient Last Name:</label>
                     </div>
                     <div>
-                        <input type="text" id="lastName" name="lastName" class="form-control" value="<?= $patientLastName; ?>" />
+                        <input type="text" id="lastName" name="patientLastName" class="form-control" value="<?= $patientLastName; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -67,7 +67,7 @@
                         <label for="married" style="color: black;">Married:</label>
                     </div>
                     <div>
-                        <input type="text" id="married" name="division" class="form-control" value="<?= $patientMarried; ?>" />
+                        <input type="text" id="married" name="patientMarried" class="form-control" value="<?= $patientMarried; ?>" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +75,7 @@
                         <label for="birthDate" style="color: black;">BirthDate:</label>
                     </div>
                     <div>
-                        <input type="text" id="birthDate" name="points" class="form-control" value="<?= $patientBirthDate; ?>" />
+                        <input type="text" id="patientBirthDate" name="patientBirthDate" class="form-control" value="<?= $patientBirthDate; ?>" />
                     </div>
                 </div>
                 <div>
