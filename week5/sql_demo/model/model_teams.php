@@ -2,12 +2,12 @@
 
 include (__DIR__ . '/db.php');
 
-function getPatients(){
+function getTeams(){
     global $db;
 
     $results = [];
 
-    $stmt = $db->prepare("SELECT * FROM PATIENTS ORDER BY patientFirstName, patientLastName, patientMarried, patientBirthDate DESC, patientFirstName");
+    $stmt = $db->prepare("SELECT * FROM TEAMS ORDER BY teamConference, teamDivision, teamPoints DESC, teamName");
 
     if($stmt->execute() && $stmt->rowCount() > 0){
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -15,20 +15,20 @@ function getPatients(){
     return $results;
 }
 
-function addPatient($pFirstN, $pLastN, $pMarried, $pBirthDate){
+function addTeam($tName, $tConference, $tDivision, $tPoints){
     global $db;
 
     $result = "";
 
-    $sql = "INSERT INTO PATIENTS SET patientFirstName = :n, patientLastName = :c, patientMarried = :d, patientBirthDate = :p";
+    $sql = "INSERT INTO TEAMS SET teamName = :n, teamConference = :c, teamDivision = :d, teamPoints = :p";
 
     $stmt = $db->prepare($sql);
 
     $binds = array(
-        ":n" => $pFirstN,
-        ":c" => $pLastN,
-        ":d" => $pMarried,
-        ":p" => $pBirthDate
+        ":n" => $tName,
+        ":c" => $tConference,
+        ":d" => $tDivision,
+        ":p" => $tPoints
     );
 
     if ( $stmt->execute($binds) && $stmt->rowCount() > 0){
@@ -37,12 +37,13 @@ function addPatient($pFirstN, $pLastN, $pMarried, $pBirthDate){
 
     return $result;
 }
-function getPatient($id){
+
+function getTeam($id){
     global $db;
 
     $result = [];
 
-    $sql = 'SELECT * FROM PATIENTS WHERE ID = :id';
+    $sql = 'SELECT * FROM TEAMS WHERE ID = :id';
 
     $stmt = $db->prepare($sql);
 
@@ -57,36 +58,36 @@ function getPatient($id){
     return $result;
 }
 
-function updatePatient($id, $pFirstN, $pLastN, $pMarried, $pBirthDate){
+function updateTeam($id, $tName, $tConference, $tDivision, $tPoints){
     global $db;
 
     $result = '';
 
-    $sql = 'UPDATE PATIENTS SET patientFirstName = :n, patientLastName = :c, patientMarried = :d, patientBirthDate = :p WHERE id = :id';
+    $sql = 'UPDATE TEAMS SET teamName = :n, teamConference = :c, teamDivision = :d, teamPoints = :p WHERE id = :id';
 
     $stmt = $db->prepare($sql);
 
     $binds = array(
         ':id'=> $id,
-        ':n'=> $pFirstN,
-        ':c'=> $pLastN,
-        ':d'=> $pMarried,
-        ':p'=> $pBirthDate
+        ':n'=> $tName,
+        ':c'=> $tConference,
+        ':d'=> $tDivision,
+        ':p'=> $tPoints
     );
 
     if ( $stmt->execute($binds) && $stmt->rowCount() > 0){
-        $result = "Patient Updated";
+        $result = "Team Updated";
     }
 
     return $result; 
 }
 
-function deletePatient($id){
+function deleteTeam($id){
     global $db;
 
     $result = "";
 
-    $sql = "DELETE FROM PATIENTS WHERE id = :id";
+    $sql = "DELETE FROM TEAMS WHERE id = :id";
 
     $stmt = $db->prepare($sql);
 
@@ -95,7 +96,7 @@ function deletePatient($id){
     );
 
     if ( $stmt->execute($binds) && $stmt->rowCount() > 0){
-        $result = "Patient Deleted";
+        $result = "Team Deleted";
     }
 
     return $result;

@@ -8,7 +8,22 @@
     $patientMarried = "";
     $patientBirthDate = "";
 
-    if (isset($_POST['storePatient'])) {
+    if (isset($_GET['Action'])) {
+        $action = filter_input(INPUT_GET,'Action');
+        $id = filter_input(INPUT_GET,'ID');
+
+        $patient = getPatient($id);
+        
+        if($patient){
+            $patientFirstName = $patient['patientFirstName'];
+            $patientLastName = $patient['patientLastName'];
+            $patientMarried = $patient['patientMarried'];
+            $patientBirthDate = $patient['patientBirthDate'];
+        }
+    }
+
+
+    if (isset($_POST['patientFirstName'])) {
         $patientFirstName = filter_input(INPUT_POST, 'patientFirstName');
         $patientLastName = filter_input(INPUT_POST, 'patientLastName');
         $patientMarried = filter_input(INPUT_POST, 'patientMarried', FILTER_VALIDATE_BOOL);
@@ -20,9 +35,21 @@
         if ($patientBirthDate == "") $error .= "<li>Please provide patient's birth date</li>";
         
         if ($error == ""){
-            addTeam ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
-            header('Location: viewPatients.php');
-            exit();
+            if(isset($_POST["storePatient"])){
+                addPatient ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
+                header('Location: viewPatients.php');
+                exit();
+            }
+            else if(isset($_POST['editPatient'])){
+                updatePatient ($id, $patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
+                header('Location: viewPatients.php');
+                exit();
+            }
+            else if(isset($_POST['deletePatient'])){
+                deletePatient ($id);
+                header('Location: viewPatients.php');
+                exit();
+            }
         }
     }
 ?>
@@ -31,7 +58,7 @@
 <div class="container">
     <div class="col-sm-12"> 
         <a class='mar12' href="viewPatients.php">Back to View All Patients</a>
-        <h2 class='mar12'>Add Patient</h2>
+        <h2 class='mar12'>Patient</h2>
         <form name="patients" method="post">
             <?php
                 if ($error != ""):
@@ -81,9 +108,20 @@
                 <div>
                     &nbsp;
                 </div>
+                <?php if($action == 'Add'): ?>
                 <div>
                     <input class="btn btn-success" type="submit" name="storePatient" value="Add Patient Information" />
-                </div>  
+                </div> 
+                <?php else: ?>
+                <div>
+                    <input class="btn btn-warning" type="submit" name="editPatient" value="Edit Patient's Info" />
+                </div> 
+                <br/>
+                <div>
+                    <input class="btn btn-danger" type="submit" name="deletePatient" value="Delete Patient" />
+                </div>   
+                <?php endif; ?>
+                 
             </div>
         </form>
     </div>

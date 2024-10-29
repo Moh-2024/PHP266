@@ -20,6 +20,7 @@
                     <th>Patient's Last Name</th>
                     <th>Married</th>
                     <th>BirthDate</th>
+                    <th>Admin</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +32,8 @@
                     <td><?= $patient['patientFirstName']; ?></td>
                     <td><?= $patient['patientLastName']; ?></td> 
                     <td><?= $patient['patientMarried']; ?></td> 
-                    <td><?= $patient['patientBirthDate']; ?></td>       
+                    <td><?= $patient['patientBirthDate']; ?></td>  
+                    <td><a href="managePatients.php?Action=Edit&ID=<?= $patient['id']; ?>">Edit</a></td>     
                 </tr>
             <?php endforeach; ?>
             </tbody>
