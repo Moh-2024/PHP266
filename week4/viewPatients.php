@@ -10,7 +10,7 @@
     <div class="col-sm-12">
         <h1>Patients</h1>
 
-        <a href="managePatients.php">Add New Patient</a>
+        <a href="managePatients.php?Action=Add">Add New Patient</a>
 
         <table class="table table-striped">
             <thead>
@@ -37,10 +37,7 @@
                 </tr>
             <?php endforeach; ?>
             </tbody>
-        </table>
-
-        <a href="managePatients.php">Add New Patient</a>
-
+            </table>
     </div>
 </div>
 
