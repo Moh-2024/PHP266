@@ -100,3 +100,39 @@ function deletePatient($id){
 
     return $result;
 }
+
+function searchPatients($pFirstN, $pLastN, $pBirthDate){
+    global $db;
+
+    $results = [];
+
+    $binds = [];
+
+    $sql = 'SELECT * FROM PATIENTS WHERE 0 = 0';
+
+    if($pFirstN != ''){
+        $sql .= ' AND patientFirstName LIKE :n';
+        $binds['n'] = '%'.$pFirstN.'%';
+    }
+
+    if($pLastN != ''){
+        $sql .= ' AND patientLastName LIKE :c';
+        $binds['c'] = '%'.$pLastN.'%';
+    }
+
+    if($pBirthDate != ''){
+        $sql .= ' AND patientBirthDate LIKE :d';
+        $binds['d'] = '%'.$pBirthDate.'%';
+    }
+
+    $sql .= " ORDER BY patientFirstName, patientLastName, patientMarried, patientBirthDate DESC, patientFirstName";
+
+    $stmt = $db->prepare($sql);
+
+    if($stmt->execute($binds) && $stmt->rowCount() > 0){
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    return $results;
+
+}
